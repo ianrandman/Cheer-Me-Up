@@ -6,8 +6,10 @@
 <head>
   <%--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>--%>
   <%--<script src="ws.js"></script>--%>
-  <%--<link rel="stylesheet" type="text/css" href="style.css">--%>
+  <link rel="stylesheet" type="text/css" href="style.css">
   <%--<link href='//fonts.googleapis.com/css?family=Marmelad' rel='stylesheet' type='text/css'>--%>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="capture.js"></script>
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
@@ -29,7 +31,10 @@
     <%--</tr>--%>
   <%--</table>--%>
 
-    <p>Hello</p>
+    <video id="video">Video stream not available.</video>
+    <div class="hide">
+      <canvas id="canvas"></canvas>
+    </div>
 
 
 </body>
