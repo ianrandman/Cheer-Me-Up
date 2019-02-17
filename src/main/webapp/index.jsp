@@ -13,29 +13,22 @@
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
-
-    <%--<div class='wrapper'>--%>
-      <%--<h1>webcam websocket transport example</h1>--%>
-      <%--<div id="webcams"></div>--%>
-    <%--</div>--%>
-
-    <%--<h1>Fuck this -- Java 8! <%= HelloAppEngine.handleWebcam() %></h1>--%>
-
-  <%--<p>This is <%= HelloAppEngine.getInfo() %>.</p>--%>
-  <%--<table>--%>
-    <%--<tr>--%>
-      <%--<td colspan="2" style="font-weight:bold;">Available Servlets:</td>--%>
-    <%--</tr>--%>
-    <%--<tr>--%>
-      <%--<td><a href='/hello'>Hello App Engine</a></td>--%>
-    <%--</tr>--%>
-  <%--</table>--%>
-
+  <div class="hide">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div class="webcam">
     <video id="video">Video stream not available.</video>
-    <div class="hide">
-      <canvas id="canvas"></canvas>
-    </div>
-
-
+  </div>
+  <div class="nextbutton">
+    <a href="google.com"><img src="img/main/next.png" height="120px" width="120px"></a>
+    <!--<img src="next.png" height="50%" width="50%">-->
+  </div>
+  <div class="emotion">
+    <img src="img/smile/smile1.png" height="100px" width="100px">
+    <!--<img src="next.png" height="50%" width="50%">-->
+  </div>
+  <div class="main_img">
+    <img src="img/temp/5rrlcu.jpg" height="500px" width="500px">
+  </div>
 </body>
 </html>

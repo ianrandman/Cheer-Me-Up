@@ -1,5 +1,39 @@
+html {
+    background: url(img/main/background.svg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
 .hide {
     overflow: hidden;
     position: absolute;
-    right: -100%;
+    left: -100%;
+}
+
+.webcam video {
+    width: 200px;
+    height: 150px;
+    box-shadow: 2px 2px 2px grey;
+}
+
+.nextbutton {
+    position: absolute;
+    top: 20px;
+    left: 1120px;
+    height: 10%;
+}
+
+.emotion {
+    position: absolute;
+    top: 175px;
+    left: 55px;
+    /*height: 10%;*/
+}
+
+.main_img {
+    position: absolute;
+    top: 40px;
+    left: 390px;
 }
