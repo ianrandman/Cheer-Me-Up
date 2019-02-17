@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.sarxos.webcam.Webcam;
-
 @WebServlet(name = "HelloAppEngine", value = "/hello")
 public class HelloAppEngine extends HttpServlet {
 
@@ -34,13 +32,6 @@ public class HelloAppEngine extends HttpServlet {
   }
 
   public static String handleWebcam() throws Exception {
-      try {
-          WebcamWebSocketStart.startServer();
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      SimpleEchoClient.wsConnect();
-
       System.out.println("Success");
       return "";
   }

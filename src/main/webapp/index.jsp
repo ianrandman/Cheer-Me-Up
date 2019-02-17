@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.brickhack2019.cheermeup.HelloAppEngine" %>
+<%@ page import="com.brickhack2019.cheermeup.RecieveImageEngine" %>
 <html>
 <head>
-  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src="ws.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <%--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>--%>
+  <%--<script src="ws.js"></script>--%>
+  <%--<link rel="stylesheet" type="text/css" href="style.css">--%>
   <%--<link href='//fonts.googleapis.com/css?family=Marmelad' rel='stylesheet' type='text/css'>--%>
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
 
-    <div class='wrapper'>
-      <h1>webcam websocket transport example</h1>
-      <div id="webcams"></div>
-    </div>
+    <%--<div class='wrapper'>--%>
+      <%--<h1>webcam websocket transport example</h1>--%>
+      <%--<div id="webcams"></div>--%>
+    <%--</div>--%>
 
-    <h1>Fuck this -- Java 8! <%= HelloAppEngine.handleWebcam() %></h1>
+    <%--<h1>Fuck this -- Java 8! <%= HelloAppEngine.handleWebcam() %></h1>--%>
 
-  <p>This is <%= HelloAppEngine.getInfo() %>.</p>
-  <table>
-    <tr>
-      <td colspan="2" style="font-weight:bold;">Available Servlets:</td>
-    </tr>
-    <tr>
-      <td><a href='/hello'>Hello App Engine</a></td>
-    </tr>
-  </table>
+  <%--<p>This is <%= HelloAppEngine.getInfo() %>.</p>--%>
+  <%--<table>--%>
+    <%--<tr>--%>
+      <%--<td colspan="2" style="font-weight:bold;">Available Servlets:</td>--%>
+    <%--</tr>--%>
+    <%--<tr>--%>
+      <%--<td><a href='/hello'>Hello App Engine</a></td>--%>
+    <%--</tr>--%>
+  <%--</table>--%>
+
+    <p>Hello</p>
+
 
 </body>
 </html>
