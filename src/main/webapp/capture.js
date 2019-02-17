@@ -111,7 +111,7 @@
                     'img-data': data
                 },
                 success: function(data) {
-                    alert('Load was performed.');
+                    console.log(data);
                 }
             });
 

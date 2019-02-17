@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 
 @WebServlet(name = "RecieveImageEngine", value = "/image")
@@ -45,7 +46,7 @@ public class RecieveImageEngine extends HttpServlet {
             e.printStackTrace();
         }
 
-        response.sendRedirect("/?emotion="+joy);
-
+        PrintWriter writer = response.getWriter();
+        writer.append(joy);
     }
 }
