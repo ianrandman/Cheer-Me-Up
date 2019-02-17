@@ -3,10 +3,19 @@
 <%@ page import="com.brickhack2019.cheermeup.HelloAppEngine" %>
 <html>
 <head>
-  <link href='//fonts.googleapis.com/css?family=Marmelad' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="ws.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <%--<link href='//fonts.googleapis.com/css?family=Marmelad' rel='stylesheet' type='text/css'>--%>
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
+
+    <div class='wrapper'>
+      <h1>webcam websocket transport example</h1>
+      <div id="webcams"></div>
+    </div>
+
     <h1>Fuck this -- Java 8! <%= HelloAppEngine.handleWebcam() %></h1>
 
   <p>This is <%= HelloAppEngine.getInfo() %>.</p>
