@@ -69,14 +69,8 @@
             }
         }, false);
 
-        startbutton.addEventListener('click', function(ev){
+        setInterval(function() {
             takepicture();
-            ev.preventDefault();
-        }, false);
-
-        setInterval(function(ev) {
-            takepicture();
-            ev.preventDefault();
         }, 10000);
 
         clearphoto();
@@ -91,7 +85,6 @@
         context.fillRect(0, 0, canvas.width, canvas.height);
 
         var data = canvas.toDataURL('image/png');
-        photo.setAttribute('src', data);
     }
 
     // Capture a photo by fetching the current contents of the video
@@ -107,21 +100,20 @@
             canvas.height = height;
             context.drawImage(video, 0, 0, width, height);
 
-            var data = canvas.toDataURL('image/png',0.1);
+            var data = canvas.toDataURL('image/jpeg',0.1);
             console.log(data);
 
             $.ajax({
-                type: 'POST',
-                dataType: 'jsonp',
-                url: 'http://localhost:8080/image',
+                type: 'PUT',
+                dataType: 'json',
+                url: 'https://www.cheermeup.me/image', //TODO won't work on localhost
                 data: {
                     'img-data': data
                 }
             });
 
-            photo.setAttribute('src', data);
         } else {
-            clearphoto();
+            //clearphoto();
         }
     }
 
