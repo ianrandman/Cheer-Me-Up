@@ -37,6 +37,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -63,27 +65,27 @@ public class FaceDetectApp {
     /**
      * Annotates an image using the Vision API.
      */
-    public static void main(String[] args) throws IOException, GeneralSecurityException {
-//        if (args.length != 2) {
-//            System.err.println("Usage:");
-//            System.err.printf(
-//                    "\tjava %s inputImagePath outputImagePath\n",
-//                    FaceDetectApp.class.getCanonicalName());
+//    public static void main(String[] args) throws IOException, GeneralSecurityException {
+////        if (args.length != 2) {
+////            System.err.println("Usage:");
+////            System.err.printf(
+////                    "\tjava %s inputImagePath outputImagePath\n",
+////                    FaceDetectApp.class.getCanonicalName());
+////            System.exit(1);
+////        }
+//        Path inputPath = Paths.get("wakeupcat.jpg");
+//        Path outputPath = Paths.get("output.jpg");
+//        if (!outputPath.toString().toLowerCase().endsWith(".jpg")) {
+//            System.err.println("outputImagePath must have the file extension 'jpg'.");
 //            System.exit(1);
 //        }
-        Path inputPath = Paths.get("wakeupcat.jpg");
-        Path outputPath = Paths.get("output.jpg");
-        if (!outputPath.toString().toLowerCase().endsWith(".jpg")) {
-            System.err.println("outputImagePath must have the file extension 'jpg'.");
-            System.exit(1);
-        }
-
-        FaceDetectApp app = new FaceDetectApp(getVisionService());
-        List<FaceAnnotation> faces = app.detectFaces(inputPath, MAX_RESULTS);
-        System.out.printf("Found %d face%s\n", faces.size(), faces.size() == 1 ? "" : "s");
-        System.out.printf("Writing to file %s\n", outputPath);
-        app.writeWithFaces(inputPath, outputPath, faces);
-    }
+//
+//        FaceDetectApp app = new FaceDetectApp(getVisionService());
+//        List<FaceAnnotation> faces = app.detectFaces(inputPath, MAX_RESULTS);
+//        System.out.printf("Found %d face%s\n", faces.size(), faces.size() == 1 ? "" : "s");
+//        System.out.printf("Writing to file %s\n", outputPath);
+//        app.writeWithFaces(inputPath, outputPath, faces);
+//    }
     // [END vision_face_detection_tutorial_run_application]
 
     // [START vision_face_detection_tutorial_client]
@@ -105,16 +107,20 @@ public class FaceDetectApp {
     /**
      * Constructs a {@link FaceDetectApp} which connects to the Vision API.
      */
-    public FaceDetectApp(Vision vision) {
-        this.vision = vision;
+    public FaceDetectApp() throws IOException, GeneralSecurityException {
+        this.vision = getVisionService();
     }
 
     // [START vision_face_detection_tutorial_send_request]
     /**
      * Gets up to {@code maxResults} faces for an image stored at {@code path}.
      */
-    public List<FaceAnnotation> detectFaces(Path path, int maxResults) throws IOException {
-        byte[] data = Files.readAllBytes(path);
+    public String detectFaces(BufferedImage image) throws IOException {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(image, "PNG", baos );
+        baos.flush();
+        byte[] data = baos.toByteArray();
+        baos.close();
 
         AnnotateImageRequest request =
                 new AnnotateImageRequest()
@@ -122,7 +128,7 @@ public class FaceDetectApp {
                         .setFeatures(ImmutableList.of(
                                 new Feature()
                                         .setType("FACE_DETECTION")
-                                        .setMaxResults(maxResults)));
+                                        .setMaxResults(1)));
         Vision.Images.Annotate annotate =
                 vision.images()
                         .annotate(new BatchAnnotateImagesRequest().setRequests(ImmutableList.of(request)));
@@ -138,7 +144,18 @@ public class FaceDetectApp {
                             ? response.getError().getMessage()
                             : "Unknown error getting image annotations");
         }
-        return response.getFaceAnnotations();
+
+        List<FaceAnnotation> faces = response.getFaceAnnotations();
+        writeWithFaces(image, Paths.get("output.jpg"), faces);
+
+        FaceAnnotation face = faces.get(0);
+
+        String emotions = "Joy likelihood: " + face.getJoyLikelihood() +
+                "\nSorrow likelihood: " + face.getSorrowLikelihood() +
+                "\nAnger likelihood: " + face.getAngerLikelihood() +
+                "\nSurprise likelihood: " + face.getSurpriseLikelihood();
+
+        return emotions;
     }
     // [END vision_face_detection_tutorial_send_request]
 
@@ -146,9 +163,9 @@ public class FaceDetectApp {
     /**
      * Reads image {@code inputPath} and writes {@code outputPath} with {@code faces} outlined.
      */
-    private static void writeWithFaces(Path inputPath, Path outputPath, List<FaceAnnotation> faces)
+    private static void writeWithFaces(BufferedImage img, Path outputPath, List<FaceAnnotation> faces)
             throws IOException {
-        BufferedImage img = ImageIO.read(inputPath.toFile());
+        // BufferedImage img = ImageIO.read(inputPath.toFile());
         annotateWithFaces(img, faces);
         ImageIO.write(img, "jpg", outputPath.toFile());
     }

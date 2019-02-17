@@ -1,4 +1,4 @@
-package com.brickhack2019.cheermeup.examples;
+package com.brickhack2019.cheermeup;
 
 import java.net.URI;
 import java.util.concurrent.TimeUnit;

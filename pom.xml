@@ -45,7 +45,7 @@
     </dependency>
     <dependency>
       <groupId>com.google.api-client</groupId>
-      <artifactId>google-api-client</artifactId>
+      <artifactId>google-api-client-appengine</artifactId>
       <version>1.28.0</version>
       <exclusions>
         <exclusion> <!-- exclude an old version of Guava -->

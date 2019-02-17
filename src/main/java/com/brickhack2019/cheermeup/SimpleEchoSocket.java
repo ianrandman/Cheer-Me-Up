@@ -1,4 +1,4 @@
-package com.brickhack2019.cheermeup.examples;
+package com.brickhack2019.cheermeup;
 
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -31,7 +31,7 @@ public class SimpleEchoSocket
     private Session session;
 
     private int imgCount = 0;
-    private static final int IMG_SKIP = 100;
+    private static final int IMG_SKIP = 10;
 
     public SimpleEchoSocket()
     {
@@ -73,10 +73,13 @@ public class SimpleEchoSocket
                 ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
                 image = ImageIO.read(bis);
                 bis.close();
+
+                FaceDetectApp faceDetectApp = new FaceDetectApp();
+                String emotions = faceDetectApp.detectFaces(image);
+                System.out.println(emotions + '\n');
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            System.out.println(image);
             imgCount = 0;
         } else {
             imgCount++;
