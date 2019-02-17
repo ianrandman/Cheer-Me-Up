@@ -7,13 +7,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class Main {
 
     private static Map<String, Double> categoryToProb;
-    private static Map<String[], Double> categoryFileNameToProb;
+    private static Map<List<String>, Double> categoryFileNameToProb;
     private static ObjectMapper gson = new ObjectMapper();
 
     public static void main(String[] args) throws IOException {
@@ -50,9 +49,9 @@ public class Main {
             categoryToProb.put(category, 1.0 / categoryToFileNames.size());
 
             categoryToFileNames.get(category).forEach((fileName) -> {
-                String[] categoryFileName = new String[2];
-                categoryFileName[0] = category;
-                categoryFileName[1] = fileName;
+                List<String> categoryFileName = new ArrayList<>();
+                categoryFileName.add(category);
+                categoryFileName.add(fileName);
 
                 categoryFileNameToProb.put(categoryFileName, 1.0 / categoryToFileNames.get(category).size());
             });

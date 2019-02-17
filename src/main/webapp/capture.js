@@ -106,7 +106,7 @@
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
-                url: 'http://localhost:8080/image', //TODO won't work on localhost
+                url: 'https://www.cheermeup.me                 /image', //TODO won't work on localhost
                 data: {
                     'img-data': data
                 },
