@@ -36,5 +36,16 @@ public class RecieveImageEngine extends HttpServlet {
 
         System.out.println(image);
 
+        String joy = "";
+
+        try {
+            FaceDetectApp faceDetectApp = new FaceDetectApp();
+            joy = faceDetectApp.detectFaces(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        response.sendRedirect("/?emotion="+joy);
+
     }
 }

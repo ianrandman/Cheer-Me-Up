@@ -24,10 +24,10 @@ public class Main {
         Map<String, Set<String>> categoryToFileNames = new HashMap<>();
         Map<String, Set<String>> fileNameToCategories = new HashMap<>();
 
-        Scanner cat = new Scanner(new File("categoryToFileNames"));
+        Scanner cat = new Scanner(new File("img/categoryToFileNames"));
         textToHashMap(categoryToFileNames, cat);
 
-        Scanner file = new Scanner(new File("fileNameToCategories"));
+        Scanner file = new Scanner(new File("img/fileNameToCategories"));
         textToHashMap(fileNameToCategories, file);
 
         String ftcJson = gson.toJson(categoryToFileNames);
@@ -73,7 +73,7 @@ public class Main {
     }
 
     public static String cfnpJson() {
-        return gson.toJson(categoryToProb);
+        return gson.toJson(categoryFileNameToProb);
     }
 
     private static void textToHashMap(Map<String, Set<String>> categoryToFileNames, Scanner cat) {

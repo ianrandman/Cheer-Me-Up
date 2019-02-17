@@ -19,7 +19,7 @@
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
-  <%= com.brickhack2019.cheermeup.Main.init() %>
+<p><%= com.brickhack2019.cheermeup.Main.init() %></p>
   <div class="hide">
     <canvas id="canvas"></canvas>
   </div>

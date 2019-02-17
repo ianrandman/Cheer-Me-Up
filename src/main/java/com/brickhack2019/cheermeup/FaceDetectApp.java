@@ -146,16 +146,16 @@ public class FaceDetectApp {
         }
 
         List<FaceAnnotation> faces = response.getFaceAnnotations();
-        writeWithFaces(image, Paths.get("output.jpg"), faces);
+        //writeWithFaces(image, Paths.get("output.jpg"), faces);
 
         FaceAnnotation face = faces.get(0);
 
-        String emotions = "Joy likelihood: " + face.getJoyLikelihood() +
-                "\nSorrow likelihood: " + face.getSorrowLikelihood() +
-                "\nAnger likelihood: " + face.getAngerLikelihood() +
-                "\nSurprise likelihood: " + face.getSurpriseLikelihood();
+//        String emotions = "Joy likelihood: " + face.getJoyLikelihood() +
+//                "\nSorrow likelihood: " + face.getSorrowLikelihood() +
+//                "\nAnger likelihood: " + face.getAngerLikelihood() +
+//                "\nSurprise likelihood: " + face.getSurpriseLikelihood();
 
-        return emotions;
+        return face.getJoyLikelihood();
     }
     // [END vision_face_detection_tutorial_send_request]
 
