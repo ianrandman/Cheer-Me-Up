@@ -5,12 +5,21 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        Gson gson = new Gson();
+
+    private static Map<String, Double> categoryToProb;
+    private static Map<String[], Double> categoryFileNameToProb;
+    private static Gson gson = new Gson();
+
+    public static void main(String[] args) throws IOException {
+        init();
+    }
+
+    public static String init() throws IOException {
 
         Map<String, Set<String>> categoryToFileNames = new HashMap<>();
         Map<String, Set<String>> fileNameToCategories = new HashMap<>();
@@ -33,8 +42,8 @@ public class Main {
 
         ///////////////////////////////////////////////////////////////////////
 
-        Map<String, Double> categoryToProb = new HashMap<>();
-        Map<String[], Double> categoryFileNameToProb = new HashMap<>();
+        categoryToProb = new HashMap<>();
+        categoryFileNameToProb = new HashMap<>();
 
         categoryToFileNames.forEach((category, fileNames) -> {
             categoryToProb.put(category, 1.0 / categoryToFileNames.size());
@@ -56,9 +65,15 @@ public class Main {
         fileNameToCategories.forEach((fileName, categories) -> {
             System.out.printf("%s : %s\n", fileName, categories.toString());
         });
+        return "";
+    }
 
+    public static String getCtpJson() {
+        return gson.toJson(categoryToProb);
+    }
 
-
+    public static String cfnpJson() {
+        return gson.toJson(categoryToProb);
     }
 
     private static void textToHashMap(Map<String, Set<String>> categoryToFileNames, Scanner cat) {

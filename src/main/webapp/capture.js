@@ -109,6 +109,9 @@
                 url: 'https://www.cheermeup.me/image', //TODO won't work on localhost
                 data: {
                     'img-data': data
+                },
+                success: function(data) {
+                    alert('Load was performed.');
                 }
             });
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.brickhack2019.cheermeup.HelloAppEngine" %>
-<%@ page import="com.brickhack2019.cheermeup.RecieveImageEngine" %>
+<%@ page import="com.brickhack2019.cheermeup.Main" %>
 <html>
 <head>
   <%--<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>--%>
@@ -10,9 +10,16 @@
   <%--<link href='//fonts.googleapis.com/css?family=Marmelad' rel='stylesheet' type='text/css'>--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="capture.js"></script>
+    <script>
+      ctp = <%= com.brickhack2019.cheermeup.Main.getCtpJson() %>;
+      cfnp = <%= com.brickhack2019.cheermeup.Main.cfnpJson() %>;
+      console.log(ctp);
+      console.log(cfnp);
+    </script>
   <title>Hello App Engine Standard Java 8</title>
 </head>
 <body>
+  <%= com.brickhack2019.cheermeup.Main.init() %>
   <div class="hide">
     <canvas id="canvas"></canvas>
   </div>
