@@ -31,7 +31,7 @@
     <!--<img src="next.png" height="50%" width="50%">-->
   </div>
   <div class="emotion">
-    <img src="img/smile/smile1.png" height="100px" width="100px">
+    <img id="smile" src="img/smile/smile1.png" height="100px" width="100px">
     <!--<img src="next.png" height="50%" width="50%">-->
   </div>
   <div class="main_img">

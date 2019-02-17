@@ -21,12 +21,12 @@ public class RecieveImageEngine extends HttpServlet {
             throws IOException {
 
         String imgData = request.getParameter("img-data");
-        imgData = imgData.substring(22);
+        imgData = imgData.substring(23);
 
         BufferedImage image = null;
         byte[] imageByte;
 
-        System.out.println(imgData);
+        //System.out.println(imgData);
 
         BASE64Decoder decoder = new BASE64Decoder();
 
@@ -35,7 +35,7 @@ public class RecieveImageEngine extends HttpServlet {
         image = ImageIO.read(bis);
         bis.close();
 
-        System.out.println(image);
+        //System.out.println(image);
 
         String joy = "";
 
@@ -43,10 +43,15 @@ public class RecieveImageEngine extends HttpServlet {
             FaceDetectApp faceDetectApp = new FaceDetectApp();
             joy = faceDetectApp.detectFaces(image);
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("No face detected.");
         }
 
-        PrintWriter writer = response.getWriter();
-        writer.append(joy);
+//        PrintWriter writer = response.getWriter();
+//        System.out.println(joy);
+//        writer.append(joy);
+        System.out.println(joy);
+        response.setStatus(200);
+        //response.setContentType("text/plain;charset=UTF-8");
+        response.getWriter().write("{\"msg\":\""+joy+"\"}");
     }
 }

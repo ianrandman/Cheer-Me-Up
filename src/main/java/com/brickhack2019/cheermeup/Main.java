@@ -1,7 +1,8 @@
 package com.brickhack2019.cheermeup;
 
-import com.google.appengine.repackaged.com.google.gson.reflect.TypeToken;
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,7 +14,7 @@ public class Main {
 
     private static Map<String, Double> categoryToProb;
     private static Map<String[], Double> categoryFileNameToProb;
-    private static Gson gson = new Gson();
+    private static ObjectMapper gson = new ObjectMapper();
 
     public static void main(String[] args) throws IOException {
         init();
@@ -30,15 +31,15 @@ public class Main {
         Scanner file = new Scanner(new File("img/fileNameToCategories"));
         textToHashMap(fileNameToCategories, file);
 
-        String ftcJson = gson.toJson(categoryToFileNames);
+        String ftcJson = gson.writeValueAsString(categoryToFileNames);
 
-        Type ctfType = new TypeToken<Map<String, Set<String>>>(){}.getType();
-        Map<String, Set<String>> ctf = gson.fromJson(ftcJson, ctfType);
+        //TypeReference<Map<String, Set<String>>> ctfType = new TypeReference<Map<String, Set<String>>>(){};
+        Map<String, Set<String>> ctf = gson.readValue(ftcJson, new TypeReference<Map<String, Set<String>>>() {});
 
-        String ctfJson = gson.toJson(fileNameToCategories);
+        String ctfJson = gson.writeValueAsString(fileNameToCategories);
 
-        Type ftcType = new TypeToken<Map<String, Set<String>>>(){}.getType();
-        Map<String, Set<String>> ftc = gson.fromJson(ctfJson, ftcType);
+        //Type ftcType = new TypeToken<Map<String, Set<String>>>(){}.getType();
+        Map<String, Set<String>> ftc = gson.readValue(ctfJson, new TypeReference<Map<String, Set<String>>>() {});
 
         ///////////////////////////////////////////////////////////////////////
 
@@ -68,12 +69,12 @@ public class Main {
         return "";
     }
 
-    public static String getCtpJson() {
-        return gson.toJson(categoryToProb);
+    public static String getCtpJson() throws JsonProcessingException {
+        return gson.writeValueAsString(categoryToProb);
     }
 
-    public static String cfnpJson() {
-        return gson.toJson(categoryFileNameToProb);
+    public static String cfnpJson() throws JsonProcessingException {
+        return gson.writeValueAsString(categoryFileNameToProb);
     }
 
     private static void textToHashMap(Map<String, Set<String>> categoryToFileNames, Scanner cat) {

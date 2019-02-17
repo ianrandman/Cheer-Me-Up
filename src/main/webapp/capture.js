@@ -71,7 +71,7 @@
 
         setInterval(function() {
             takepicture();
-        }, 10000);
+        }, 1000);
 
         clearphoto();
     }
@@ -101,17 +101,36 @@
             context.drawImage(video, 0, 0, width, height);
 
             var data = canvas.toDataURL('image/jpeg',0.1);
-            console.log(data);
+            //console.log(data);
 
             $.ajax({
-                type: 'PUT',
+                type: 'POST',
                 dataType: 'json',
-                url: 'https://www.cheermeup.me/image', //TODO won't work on localhost
+                url: 'http://localhost:8080/image', //TODO won't work on localhost
                 data: {
                     'img-data': data
                 },
-                success: function(data) {
-                    console.log(data);
+                success: function (data) {
+                    console.log(data.msg);
+                    if(data.msg === 'VERY_UNLIKELY') {
+                        $("#smile").attr('src','img/smile/smile4.png');
+                    }
+                    else if(data.msg === 'UNLIKELY') {
+                        $("#smile").attr('src','img/smile/smile4.png');
+                    }
+                    else if(data.msg === 'POSSIBLE') {
+                        $("#smile").attr('src','img/smile/smile3.png');
+                    }
+                    else if(data.msg === 'LIKELY') {
+                        $("#smile").attr('src','img/smile/smile2.png');
+                    }
+                    else if(data.msg === 'VERY_LIKELY') {
+                        $("#smile").attr('src','img/smile/smile1.png');
+                    }
+                },
+                error: function (e) {
+
+                    console.log("ERROR: ", e);
                 }
             });
 
