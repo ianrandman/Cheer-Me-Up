@@ -25,7 +25,7 @@ In the future, Cheer Me Up may become better at determining what the user likes 
 java, google-cloud-vision, maven, json, mozilla-media-stream, google-app-engine, javascript, html, html5, ajax, css, jquery
 
 ## Try it out
-www.cheermeup.me
+https://www.cheermeup.me
 
 
 # Google App Engine setup
